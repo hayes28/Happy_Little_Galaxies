@@ -4,6 +4,7 @@ import SignUpModal from './components/SignUpModal';
 import LoginModal from './components/LoginModal';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase/firebaseInit';
+import M from 'materialize-css';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -11,17 +12,37 @@ const App = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
+    // Firebase Auth Listener
     const unsubscribe = onAuthStateChanged(auth, user => {
       setCurrentUser(user);
     });
 
-    return () => unsubscribe(); // Cleanup subscription on unmount
+    // Materialize Modal Initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      var modals = document.querySelectorAll('.modal');
+      M.Modal.init(modals);
+    });
+
+    // Cleanup function for Firebase Auth Listener
+    return () => unsubscribe();
   }, []);
 
-  const handleShowSignUp = () => setShowSignUpModal(true);
-  const handleShowLogin = () => setShowLoginModal(true);
-  const handleCloseSignUp = () => setShowSignUpModal(false);
-  const handleCloseLogin = () => setShowLoginModal(false);
+  const handleShowSignUp = () => {
+    console.log('Opening Sign Up Modal');
+    setShowSignUpModal(true);
+  };
+  const handleShowLogin = () => {
+    console.log('Opening Login Modal');
+    setShowLoginModal(true);
+  };
+  const handleCloseSignUp = () => {
+    console.log('Closing Sign Up Modal');
+    setShowSignUpModal(false);
+  };
+  const handleCloseLogin = () => {
+    console.log('Closing Login Modal');
+    setShowLoginModal(false);
+  }
 
   return (
     <div>
@@ -30,9 +51,8 @@ const App = () => {
         handleShowSignUp={handleShowSignUp}
         handleShowLogin={handleShowLogin}
       />
-      <SignUpModal show={showSignUpModal} onClose={handleCloseSignUp} />
-      <LoginModal show={showLoginModal} onClose={handleCloseLogin} />
-      {/* ... other components ... */}
+      {showSignUpModal && <SignUpModal show={showSignUpModal} onClose={handleCloseSignUp} />}
+      {showLoginModal && <LoginModal show={showLoginModal} onClose={handleCloseLogin} />}
     </div>
   );
 };
