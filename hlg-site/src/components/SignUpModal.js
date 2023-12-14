@@ -21,8 +21,9 @@ const SignUpModal = ({ show, onClose }) => {
   if (!show) return null;
 
   return (
-    <div className="modal" style={{ display: show ? 'block' : 'none' }}>
-      <div className="modal-content">
+    <div className={`modal ${show ? 'show-modal' : ''}`}>
+      <div className={`modal-overlay ${show ? 'show-overlay' : ''}`} onClick={onClose}></div>
+      <div className="modal-content modal-bg-color">
         <h4>Sign up</h4>
         <form onSubmit={handleSubmit}>
           <div className="input-field">
@@ -43,7 +44,7 @@ const SignUpModal = ({ show, onClose }) => {
             />
             <label htmlFor="signup-password">Choose password</label>
           </div>
-          <button type="submit" className="btn yellow darken-2 z-depth-0">Sign up</button>
+          <button type="submit" className="modal-submit-btn">Sign up</button>
           {error && <p className="error">{error}</p>}
         </form>
       </div>
