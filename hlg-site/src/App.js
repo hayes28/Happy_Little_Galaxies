@@ -18,29 +18,27 @@ const App = () => {
     });
 
     // Materialize Modal Initialization
-    document.addEventListener('DOMContentLoaded', function() {
       var modals = document.querySelectorAll('.modal');
       M.Modal.init(modals);
-    });
 
     // Cleanup function for Firebase Auth Listener
     return () => unsubscribe();
   }, []);
 
   const handleShowSignUp = () => {
-    console.log('Opening Sign Up Modal');
+    // console.log('Opening Sign Up Modal');
     setShowSignUpModal(true);
   };
   const handleShowLogin = () => {
-    console.log('Opening Login Modal');
+    // console.log('Opening Login Modal');
     setShowLoginModal(true);
   };
   const handleCloseSignUp = () => {
-    console.log('Closing Sign Up Modal');
+    // console.log('Closing Sign Up Modal');
     setShowSignUpModal(false);
   };
   const handleCloseLogin = () => {
-    console.log('Closing Login Modal');
+    // console.log('Closing Login Modal');
     setShowLoginModal(false);
   }
 

@@ -22,7 +22,7 @@ const LoginModal = ({ show, onClose }) => {
   if (!show) return null;
 
   return (
-    <div className="modal">
+    <div className="modal" style={{ display: show ? 'block' : 'none' }}>
       <div className="modal-content">
         <h4>Login</h4>
         <form onSubmit={handleSubmit}>
