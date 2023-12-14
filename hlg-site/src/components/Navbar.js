@@ -12,19 +12,19 @@ const Navbar = ({ currentUser, handleShowSignUp, handleShowLogin }) => {
   return (
     <nav style={{ backgroundColor: '#303A52' }}>
       <div className="nav-wrapper container">
-        <a href="#" className="brand-logo" style={{ fontFamily: 'Rock Salt', color: '#9E579D' }}>
+        <span className="brand-logo" style={{ fontFamily: 'Rock Salt', color: '#9E579D' }}>
           Happy Little Galaxies
-        </a>
+        </span>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           {currentUser ? (
             <>
-              <li><a href="#" style={{ color: '#E4CCFF' }}>Account</a></li>
-              <li><a href="#" style={{ color: '#E4CCFF' }} onClick={handleLogout}>Logout</a></li>
+              <li><button onClick={() => {}} style={{ color: '#E4CCFF' }}>Account</button></li>
+              <li><button onClick={handleLogout} style={{ color: '#E4CCFF' }}>Logout</button></li>
             </>
           ) : (
             <>
-              <li><a href="#" style={{ color: '#E4CCFF' }} onClick={handleShowLogin}>Login</a></li>
-              <li><a href="#" style={{ color: '#574B90', backgroundColor: '#E4CCFF' }} onClick={handleShowSignUp}>Sign up</a></li>
+              <li><button onClick={handleShowLogin} style={{ color: '#E4CCFF' }}>Login</button></li>
+              <li><button onClick={handleShowSignUp} style={{ color: '#574B90', backgroundColor: '#E4CCFF' }}>Sign up</button></li>
             </>
           )}
         </ul>
