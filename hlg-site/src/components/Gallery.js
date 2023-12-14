@@ -9,23 +9,36 @@ const Gallery = () => {
   const [selectedSubject, setSelectedSubject] = useState(""); // selected subject
   const [error, setError] = useState(null); // error message
 
+useEffect(() => {
+
   // fetches the paintings from the API
   const fetchPaintings = async () => {
     try {
       const response = await fetch(
-        `/api/filter?color=${selectedColor}&subject=${selectedSubject}`
+        `http://localhost:4000/filter?color=${selectedColor}&subject=${selectedSubject}`
       );
-      const data = await response.json();
-      setPaintings(data);
+
+      // const response = await fetch(
+      //   `http://localhost:3000/filter?color=${selectedColor}&subject=${selectedSubject}`
+      // );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      if (response.headers.get("Content-Type").includes("application/json")) {
+        const data = await response.json();
+        setPaintings(data);
+      } else {
+        throw new Error("Response is not JSON");
+      }
     } catch (err) {
       setError(err.message);
     }
   };
 
-  // fetches the paintings when the component mounts
-  useEffect(() => {
-    fetchPaintings();
-  }, [selectedColor, selectedSubject]);
+
+  fetchPaintings();
+}, [selectedColor, selectedSubject]);
+
 
   // renders the gallery
   return (
@@ -52,6 +65,6 @@ const Gallery = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Gallery;
