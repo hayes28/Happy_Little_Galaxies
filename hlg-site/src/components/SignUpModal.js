@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase/firebaseInit'; // Make sure the path is correct
 
 const SignUpModal = ({ show, onClose }) => {
+  console.log('SignUpModal show:', show);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
