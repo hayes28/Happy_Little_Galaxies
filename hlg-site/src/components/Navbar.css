@@ -1,0 +1,48 @@
+/* Navbar.css */
+
+.brand-logo {
+  font-family: 'Rock Salt', cursive;
+  color: #9E579D !important;
+}
+
+.btn-signup {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800; /* Extra bold */
+  font-size: 16px;
+  color: #574B90;
+  background-color: #E4CCFF;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+/* Style for the Navbar button */
+.nav-button {
+  padding: 0 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.btn-login,
+.btn-account,
+.btn-logout {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #E4CCFF;
+  background-color: transparent;
+  line-height: 64px;
+  height: 100%;
+}
+
+/* Hover state for the Login button */
+.btn-login:hover,
+.btn-account:hover,
+.btn-logout:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

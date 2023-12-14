@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase/firebaseInit'; // Make sure the path is correct
+import { auth } from '../firebase/firebaseInit';
+import './ModalStyles.css';
 
 const LoginModal = ({ show, onClose }) => {
   const [email, setEmail] = useState('');
@@ -21,8 +22,9 @@ const LoginModal = ({ show, onClose }) => {
   if (!show) return null;
 
   return (
-    <div className="modal" style={{ display: show ? 'block' : 'none' }}>
-      <div className="modal-content">
+    <div className={`modal ${show ? 'show-modal' : ''}`}>
+      <div className={`modal-overlay ${show ? 'show-overlay' : ''}`} onClick={onClose}></div>
+      <div className="modal-content modal-bg-color">
         <h4>Login</h4>
         <form onSubmit={handleSubmit}>
           <div className="input-field">
@@ -43,7 +45,7 @@ const LoginModal = ({ show, onClose }) => {
             />
             <label htmlFor="login-password">Your password</label>
           </div>
-          <button type="submit" className="btn yellow darken-2 z-depth-0">Login</button>
+          <button type="submit" className="modal-submit-btn">Login</button>
           {error && <p className="error">{error}</p>}
         </form>
       </div>
