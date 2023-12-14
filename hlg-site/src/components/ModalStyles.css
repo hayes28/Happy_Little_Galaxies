@@ -5,7 +5,7 @@
   background-color: #303A52;
 }
 
-.modal-bg-color h4 {
+.modal-content h4 {
   font-family: 'Inter', sans-serif;
   color: #E4CCFF;
   padding-bottom: 40px;
@@ -62,4 +62,15 @@
 /* Show the overlay when the modal is open */
 .show-overlay {
   display: block;
+}
+
+.modal-account {
+  text-align: center;
+}
+
+.modal-account p {
+  font-family: 'Raleway', sans-serif;
+  font-size: 800;
+  color: white;
+  font-size: 20px;
 }
