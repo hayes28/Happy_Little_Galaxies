@@ -25,8 +25,14 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleShowSignUp = () => setShowSignUpModal(true);
-  const handleShowLogin = () => setShowLoginModal(true);
+  const handleShowSignUp = () => {
+    setShowLoginModal(false); // Close login modal if open
+    setShowSignUpModal(true); // Open sign up modal
+  };
+  const handleShowLogin = () => {
+    setShowSignUpModal(false); // Close sign up modal if open
+    setShowLoginModal(true); // Open login modal
+  };
   const handleCloseSignUp = () => setShowSignUpModal(false);
   const handleCloseLogin = () => setShowLoginModal(false);
 
