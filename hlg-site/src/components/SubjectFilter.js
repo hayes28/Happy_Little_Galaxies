@@ -1,6 +1,6 @@
 // UI for selecting a subject filter for the galaxy images
 import React from "react";
-import "FilterStyles.css";
+import "./FilterStyles.css";
 
 const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
   // list of subjects

@@ -1,6 +1,6 @@
 // UI for selecting a color filter for the galaxy images
 import React from "react";
-import "FilterStyles.css";
+import "./FilterStyles.css";
 
 const ColorFilter = ({ selectedColor, setSelectedColor }) => {
   // list of colors
