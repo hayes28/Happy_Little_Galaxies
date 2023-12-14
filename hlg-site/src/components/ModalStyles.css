@@ -1,0 +1,65 @@
+/* ModalStyles.css */
+
+/* This class is for the modal background */
+.modal-bg-color {
+  background-color: #303A52;
+}
+
+.modal-bg-color h4 {
+  font-family: 'Inter', sans-serif;
+  color: #E4CCFF;
+  padding-bottom: 40px;
+}
+
+/* Styles for input fields */
+.modal .input-field input {
+  color: #fff; /* White color for input text */
+}
+
+/* Styles for input labels */
+.modal .input-field label {
+  color: #ccc; /* Light grey color for labels */
+}
+
+/* Styles for the submit buttons */
+.modal-submit-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800; /* Extra bold */
+  font-size: 16px;
+  background-color: #E4CCFF;
+  color: #574B90;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+/* This class is to toggle display of modal */
+.show-modal {
+  display: block;
+}
+
+/* Overlay that covers the screen when the modal is shown */
+.modal-overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+  z-index: 10; /* Ensure it's below the modal content */
+}
+
+.modal-content {
+  position: fixed;
+  width: 50%;
+  height: auto;
+  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.2), 0 6px 40px 0 rgba(0,0,0,0.19);
+  /* Center the modal on the screen */
+  left: 50%;
+  top: 28%;
+  transform: translate(-50%, -50%);
+  z-index: 11; /* Ensure it's above the overlay */
+  /* Other styling for the modal content */
+}
+
+/* Show the overlay when the modal is open */
+.show-overlay {
+  display: block;
+}
