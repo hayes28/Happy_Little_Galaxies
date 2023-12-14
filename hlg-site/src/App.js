@@ -5,6 +5,7 @@ import LoginModal from './components/LoginModal';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase/firebaseInit';
 import M from 'materialize-css';
+import "./components/FilterStyles.css";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
