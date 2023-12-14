@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase/firebaseInit'; // Make sure the path is correct
 
 const SignUpModal = ({ show, onClose }) => {
-  console.log('SignUpModal show:', show);
+  // console.log('SignUpModal show:', show);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,7 +22,7 @@ const SignUpModal = ({ show, onClose }) => {
   if (!show) return null;
 
   return (
-    <div className="modal">
+    <div className="modal" style={{ display: show ? 'block' : 'none' }}>
       <div className="modal-content">
         <h4>Sign up</h4>
         <form onSubmit={handleSubmit}>
