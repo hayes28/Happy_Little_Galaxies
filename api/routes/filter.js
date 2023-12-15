@@ -33,6 +33,10 @@ router.get("/filter", async (req, res) => {
     query += " WHERE " + conditions.join(" AND ");
   }
 
+  // Add pagination to the query
+  query += ` LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
+  values.push(limit, offset);
+
   try {
     const result = await pool.query(query, values);
     res.json(result.rows);
