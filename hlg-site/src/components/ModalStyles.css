@@ -74,3 +74,10 @@
   color: white;
   font-size: 20px;
 }
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 600px) {
+  .modal-content {
+    width: 70%;
+  }
+}
