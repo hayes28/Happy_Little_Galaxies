@@ -15,6 +15,7 @@ const App = () => {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showAccountModal, setShowAccountModal] = useState(false);
+  const [sidenavInstance, setSidenavInstance] = useState(null);
 
   useEffect(() => {
     // Firebase Auth Listener
@@ -27,19 +28,33 @@ const App = () => {
       var modals = document.querySelectorAll('.modal');
       M.Modal.init(modals);
 
+    // Materialize Sidenav Initialization
+      var elems = document.querySelectorAll('.sidenav');
+      const instance = M.Sidenav.init(elems)[0];
+      setSidenavInstance(instance);
+
     // Cleanup function for Firebase Auth Listener
     return () => unsubscribe();
   }, []);
 
   const handleShowSignUp = () => {
+    if (sidenavInstance) {
+      sidenavInstance.close();
+    }
     setShowLoginModal(false); // Close login modal if open
     setShowSignUpModal(true); // Open sign up modal
   };
   const handleShowLogin = () => {
+    if (sidenavInstance) {
+      sidenavInstance.close();
+    }
     setShowSignUpModal(false); // Close sign up modal if open
     setShowLoginModal(true); // Open login modal
   };
   const handleShowAccount = () => {
+    if (sidenavInstance) {
+      sidenavInstance.close();
+    }
     // Close other modals if open and open account modal
     setShowLoginModal(false);
     setShowSignUpModal(false);

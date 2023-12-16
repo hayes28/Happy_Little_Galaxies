@@ -1,8 +1,9 @@
 /* Navbar.css */
 
-.brand-logo {
+nav .nav-wrapper .brand-logo {
   font-family: 'Rock Salt', cursive;
   color: #9E579D !important;
+  white-space: nowrap;
 }
 
 .btn-signup {
@@ -45,4 +46,30 @@
 .btn-account:hover,
 .btn-logout:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 600px) {
+  nav .nav-wrapper .brand-logo {
+    font-size: 18px;
+    width: auto;
+    white-space: nowrap;
+    padding: 0;
+  }
+
+  .btn-login,
+.btn-account,
+.btn-logout {
+  font-size: 20px;
+}
+
+.btn-login:hover,
+.btn-account:hover,
+.btn-logout:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-signup{
+  font-size: 20px;
+}
 }
