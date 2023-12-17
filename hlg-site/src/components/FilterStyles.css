@@ -1,17 +1,19 @@
 /* Styling for filter section */
 /* Super basic styling for testing */
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 1rem;
+.filter-bg {
   background-image: image-set('https://firebasestorage.googleapis.com/v0/b/happy-little-galaxies.appspot.com/o/starry-night-sky.jpg?alt=media&token=80ba548a-d851-43f7-b611-9faf2925b692');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 1rem;
   padding: 1rem;
   border-radius: 5px;
-  color: white;
 }
 
 /* The gallery background image needs to be behind the filter-container color*/
