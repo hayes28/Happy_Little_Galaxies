@@ -39,3 +39,5 @@ csv()
       "utf-8"
     ); // write to the JSON file
   });
+
+  console.log("JSON file created");
