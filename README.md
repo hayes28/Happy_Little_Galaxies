@@ -63,7 +63,7 @@ cd db
 ## Step 2: Run the User and Database Creation Script
 - Run the following command to create the database and user:
 ```
-psql -U postgres -f create_db.sql
+psql -U postgres -f create_user_and_db.sql
 ```
 *** Note: If you are using a different user than the default, replace postgres with your username.
 You will be prompted to enter your password. Enter the password you created during the installation process. Sudo might be required to run this command.
@@ -90,8 +90,12 @@ psql -U test_user -d test_db
     public | paintings | table | test_user
     (1 rows)
 ```
+- Exit the database:
+```
+\q
+```
 ## Step 5: Convert CSV Data to JSON
-- Run the following command to convert the CSV data to JSON:
+- In the db folder run the following command to convert the CSV data to JSON:
 ```
 node convert-csv-to-json.js
 ```
@@ -100,7 +104,23 @@ node convert-csv-to-json.js
 JSON file created
 ```
 You can view the JSON file in the data directory. File name: data.json.
-## Step 6: Load the JSON Data into the Database
+
+## Step 6: Make your own .env file
+- Create a .env file in the root directory of the project.
+- Add the following environment variables to the .env file:
+```
+DB_HOST=localhost
+DB_DATABASE=test_db
+DB_USER=test_user
+DB_PASS=test1234
+DB_PORT=5432
+DB_URL="postgresql://$DB_USER:$DB_PASS@$DB_HOST:$DB_PORT/$DB_DATABASE"
+```
+- Replace localhost with the hostname of your database server.
+- PORT 5432 is the default port for PostgreSQL. If you are using a different port, replace 5432 with your port number.
+- Save the file.
+
+## Step 7: Load the JSON Data into the Database
 - Run the following command to load the JSON data into the database:
 ```
 node load-data.js
@@ -109,21 +129,33 @@ node load-data.js
 ```
 All paintings have been inserted
 ```
+- You can also view the data in the database using the psql command:
+```
+psql -U test_user -d test_db
+```
 - Verify that the data has been loaded into the database:
 ```
 SELECT * FROM paintings;
 ```
+- To exit the database, run the following command:
+```
+\q
+```
 ### Troubleshooting
 - If you encounter issues during installation or setup, consult the PostgreSQL documentation or relevant community forums for assistance.
 # Run the Application
+- Open a terminal and navigate to the project directory.
+- Change to the React app directory:
+```
+cd hlg-site
+```
 - Run the following command to start the application:
 ```
 npm start
 ```
 - Open your browser and navigate to http://localhost:3000.
-- You should see the following page:
-![alt text]()
-# Run Server
+# Run Express Server
+- Open a second terminal and navigate to the project directory.
 - Change to the api directory:
 ```
 cd api

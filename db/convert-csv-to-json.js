@@ -32,7 +32,6 @@ csv()
       };
     });
 
-    console.log(updatedJsonObj); // log the updated JSON array
     fs.writeFileSync(
       jsonFilePath,
       JSON.stringify(updatedJsonObj, null, 2),
