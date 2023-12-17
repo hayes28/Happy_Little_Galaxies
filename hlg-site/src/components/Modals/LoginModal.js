@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebase/firebaseInit'; // Make sure the path is correct
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebase/firebaseInit';
+import './ModalStyles.css';
 
-const SignUpModal = ({ show, onClose }) => {
+const LoginModal = ({ show, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         onClose(); // Close the modal
       })
@@ -18,33 +19,35 @@ const SignUpModal = ({ show, onClose }) => {
       });
   };
 
-  if (!show) return null;
+  if (!show) {
+    return null;
+  }
 
   return (
     <div className={`modal ${show ? 'show-modal' : ''}`}>
       <div className={`modal-overlay ${show ? 'show-overlay' : ''}`} onClick={onClose}></div>
       <div className="modal-content modal-bg-color">
-        <h4>Sign up</h4>
+        <h4>Login</h4>
         <form onSubmit={handleSubmit}>
           <div className="input-field">
             <input
               type="email"
-              id="signup-email"
+              id="login-email"
               required
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="signup-email">Email address</label>
+            <label htmlFor="login-email">Email address</label>
           </div>
           <div className="input-field">
             <input
               type="password"
-              id="signup-password"
+              id="login-password"
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label htmlFor="signup-password">Choose password</label>
+            <label htmlFor="login-password">Your password</label>
           </div>
-          <button type="submit" className="modal-submit-btn">Sign up</button>
+          <button type="submit" className="modal-submit-btn">Login</button>
           {error && <p className="error">{error}</p>}
         </form>
       </div>
@@ -52,4 +55,4 @@ const SignUpModal = ({ show, onClose }) => {
   );
 };
 
-export default SignUpModal;
+export default LoginModal;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import SignUpModal from './components/SignUpModal';
-import LoginModal from './components/LoginModal';
-import AccountModal from './components/AccountModal';
+import Navbar from './components/Navbar/Navbar';
+import SignUpModal from './components/Modals/SignUpModal';
+import LoginModal from './components/Modals/LoginModal';
+import AccountModal from './components/Modals/AccountModal';
 import Gallery from './components/Gallery';
-import MainSection from './components/MainSection';
+import MainSection from './components/MainSection/MainSection';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase/firebaseInit';
 import M from 'materialize-css';
