@@ -23,11 +23,11 @@ const MainSection = () => {
             Instructions on how to use the filtering system of the website:<br />
             How to Navigate Your Space Art Adventure:
           </p>
-          <p class="indented-paragraph">
+          <p className="indented-paragraph">
             <strong>1. Color Your Galaxy:</strong> Use our color swatches to filter through the paintings. Whether you’re drawn to the vibrant hues
             of a nebula or the subtle shades of distant stars, find your palette here.
           </p>
-          <p class="indented-paragraph">
+          <p className="indented-paragraph">
             <strong>2. Choose Your Cosmic Subject:</strong> Select from a variety of space subjects using our dropdown box. From planets to galaxies,
             find the celestial bodies that speak to your soul.
           </p>
