@@ -22,6 +22,10 @@ Download the installer from the official website: https://www.postgresql.org/dow
 ```
 brew install postgresql
 ```
+- Start PostgreSQL server
+```
+brew services start postgresql
+```
 
 #### For Linux:
 Run the following commands:
@@ -67,6 +71,16 @@ psql -U postgres -f create_user_and_db.sql
 ```
 *** Note: If you are using a different user than the default, replace postgres with your username.
 You will be prompted to enter your password. Enter the password you created during the installation process. Sudo might be required to run this command.
+
+### For Mac users who installed PostgreSQL with Homebrew
+Homebrew usually configures PostgreSQL to use the active OS user as the default database user.
+
+To confirm the superuser name - enter PostgreSQL with `psql postgres` then type `\du;` to list the users. Exit postgres with `\q`
+
+- Run the following command to create the database and user:
+```
+psql -U <super_user_name> -d postgres -f create_user_and_db.sql
+```
 
 ## Step 3: Run the Table Creation Script
 - Run the second script to create the necessary tables in the new database:
