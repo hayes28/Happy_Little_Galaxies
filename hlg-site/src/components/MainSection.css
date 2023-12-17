@@ -1,0 +1,43 @@
+.main-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+.bob-ross-image {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/happy-little-galaxies.appspot.com/o/Logo.PNG?alt=media&token=4d58e2b9-dbf8-40ad-af6d-023351c2e997');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 35%;
+}
+
+.welcome-text {
+  color: white;
+  width: 65%;
+  margin: .5rem 3rem 1rem 2rem
+}
+
+.welcome-text h1 {
+  font-family: 'Major Mono Display', monospace;
+  font-size: 3rem;
+  margin: 0 0 1.68rem 0;
+}
+
+.welcome-text .call-to-action {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.welcome-text .instructions {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+}
+
+.welcome-text .instructions .indented-paragraph {
+  margin-left: 2rem;
+}
+
+.welcome-text .instructions .indented-paragraph strong {
+  font-weight: bold;
+}
