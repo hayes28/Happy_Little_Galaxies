@@ -33,11 +33,16 @@ const Gallery = () => {
       </div>
       <div className="gallery">
         {paintings.map((painting) => (
-          <img
-            key={painting.id}
-            src={painting.painting_url}
-            alt={painting.title}
-          />
+          <div className="card" key={painting.id}>
+          <div className="card-image">
+            <img src={painting.painting_url} alt={painting.title} />
+          </div>
+          <div className="card-content">
+            <span className="card-title">{painting.title}</span>
+            <p>Colors: {painting.colors.join(", ")}</p>
+            <p>Subjects: {painting.subjects.join(", ")}</p>
+          </div>
+        </div>
         ))}
       </div>
     </div>
