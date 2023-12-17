@@ -1,21 +1,21 @@
 const express = require("express");
-const router = express.Router();
-const { fetchFilterData } = require('../controllers/filterController');
 const cors = require("cors");
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
+
 require("dotenv").config({ path: "../.env" });
 
-// Import the filter route
+// Import the filter route from the routes directory
 const filterRouter = require("./routes/filter");
 
+// Middlewares
 app.use(express.json());
 app.use(cors());
 
-// Use the filter route
-app.use(filterRouter);
+// Use the filter route for any '/filter' endpoint calls
+app.use("/filter", filterRouter);
 
-// Define a route
+// Root route
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
@@ -24,17 +24,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
-// Define a route for filtered data with pagination
-router.get('/filtered-data', async (req, res) => {
-  try {
-    const { limit = 10, offset = 0 } = req.query;
-    const filterData = await fetchFilteredData(limit, offset);
-    res.json(filteredData);
-  } catch (error) {
-    console.error('Error fetching filtered data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-module.exports = router;

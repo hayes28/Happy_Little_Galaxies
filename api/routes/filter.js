@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { Pool } = require("pg");
-require("dotenv").config();
+const { fetchFilteredData } = require("../controllers/filterController");
+require("dotenv").config({ path: "../.env" });
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -10,11 +11,38 @@ const pool = new Pool({
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
 });
-console.log("DB_PASS:", process.env.DB_PASS);
 
-router.get("/filter", async (req, res) => {
-  const { subject, color } = req.query;
+// Fetch distinct subjects
+router.get("/subjects", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT DISTINCT jsonb_array_elements_text(subjects) as subject FROM paintings;"
+    );
+    const subjects = result.rows.map((row) => row.subject);
+    res.json(subjects);
+  } catch (err) {
+    console.error("Error fetching subjects", err);
+    res.status(500).json({ error: "An unexpected error occurred" });
+  }
+});
 
+// Fetch distinct colors
+router.get("/colors", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT DISTINCT jsonb_array_elements_text(colors) as color FROM paintings;"
+    );
+    const colors = result.rows.map((row) => row.color);
+    res.json(colors);
+  } catch (err) {
+    console.error("Error fetching colors", err);
+    res.status(500).json({ error: "An unexpected error occurred" });
+  }
+});
+
+// Apply filters and pagination to fetch paintings
+router.get("/", async (req, res) => {
+  const { subject, color, limit = 10, offset = 0 } = req.query;
   let query = "SELECT * FROM paintings";
   let conditions = [];
   let values = [];
@@ -33,9 +61,8 @@ router.get("/filter", async (req, res) => {
     query += " WHERE " + conditions.join(" AND ");
   }
 
-  // Add pagination to the query
   query += ` LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
-  values.push(limit, offset);
+  values.push(parseInt(limit, 10), parseInt(offset, 10));
 
   try {
     const result = await pool.query(query, values);

@@ -1,0 +1,26 @@
+/* Color Style Sheet */
+.color-filter {
+    margin-bottom: 1rem;
+}
+
+.color-filter select {
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.color-filter label {
+    margin-right: 0.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+/* Apply some basic responsive spacing */
+@media (min-width: 768px) {
+
+    .color-filter {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+}

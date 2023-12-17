@@ -6,6 +6,7 @@
 
 .bob-ross-image {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/happy-little-galaxies.appspot.com/o/Logo.PNG?alt=media&token=4d58e2b9-dbf8-40ad-af6d-023351c2e997');
+  opacity: calc(100% - 40%); /* 60% */
   background-size: contain;
   background-repeat: no-repeat;
   width: 35%;
