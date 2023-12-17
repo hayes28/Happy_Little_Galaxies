@@ -100,7 +100,7 @@ node convert-csv-to-json.js
 JSON file created
 ```
 You can view the JSON file in the data directory. File name: data.json.
-### Step 6: Load the JSON Data into the Database
+## Step 6: Load the JSON Data into the Database
 - Run the following command to load the JSON data into the database:
 ```
 node load-data.js
