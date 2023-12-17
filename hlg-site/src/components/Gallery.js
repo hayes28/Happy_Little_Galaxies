@@ -16,20 +16,20 @@ const Gallery = () => {
   };
 
   return (
-    <div>
+    <div className="filter-bg">
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <div className="filter-header">
-      <ColorFilter
-        selectedColor={selectedColor}
-        setSelectedColor={(color) => handleFilterChange(color, selectedSubject)}
-      />
-      <SubjectFilter
-        selectedSubject={selectedSubject}
-        setSelectedSubject={(subject) =>
-          handleFilterChange(selectedColor, subject)
-        }
-      />
+        <ColorFilter
+          selectedColor={selectedColor}
+          setSelectedColor={(color) => handleFilterChange(color, selectedSubject)}
+        />
+        <SubjectFilter
+          selectedSubject={selectedSubject}
+          setSelectedSubject={(subject) =>
+            handleFilterChange(selectedColor, subject)
+          }
+        />
       </div>
       <div className="gallery">
         {paintings.map((painting) => (
