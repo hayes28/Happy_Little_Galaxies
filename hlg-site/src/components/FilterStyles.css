@@ -23,34 +23,24 @@
   height: auto;
   border-radius: 5px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
-  .gallery div {
-    background-color: #9E579D;
-    opacity: calc(100% - 50%);
-    padding: 1rem;
-    border-radius: 5px;
-  }
 }
 
 .gallery .card {
   margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.gallery .card h3 {
-  margin-bottom: 1rem;
+.gallery .card-content p {
+  font-family: 'Raleway', sans-serif;
+}
+
+.gallery .card-image {
+  border: 10px solid #5F2E1F;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .gallery .card p {
-  margin-bottom: 1rem;
-}
-
-.gallery .card .subject {
-  margin-bottom: 1rem;
-}
-
-.gallery .card .color {
   margin-bottom: 1rem;
 }
 
