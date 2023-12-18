@@ -77,31 +77,3 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-.subject-filter,
-.color-filter {
-  margin-bottom: 1rem;
-}
-
-.subject-filter select,
-.color-filter select {
-  padding: 0.5rem;
-  margin-left: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.subject-filter label,
-.color-filter label {
-  margin-right: 0.5rem;
-  font-weight: bold;
-}
-
-/* Apply some basic responsive spacing */
-@media (min-width: 768px) {
-  .subject-filter,
-  .color-filter {
-    display: inline-block;
-    margin-right: 1rem;
-  }
-}

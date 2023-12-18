@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SubjectStyles.css";
+import M from "materialize-css";
 
 const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
   const [subjects, setSubjects] = useState([]);
@@ -22,8 +23,13 @@ const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
     fetchSubjects();
   }, []);
 
+  // Initialize Materialize CSS select after the component mounts and whenever subjects change
   useEffect(() => {
-    console.log(subjects);
+    // Ensure Materialize is available and subjects/colors are loaded
+    if (window.M && subjects.length) {
+      const select = document.querySelector("#subject");
+      M.FormSelect.init(select);
+    }
   }, [subjects]);
 
   const handleSubject = (e) => {

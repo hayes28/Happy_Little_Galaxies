@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { Pool } = require("pg");
-const { fetchFilteredData } = require("../controllers/filterController");
 require("dotenv").config({ path: "../.env" });
 
 const pool = new Pool({
@@ -40,36 +39,41 @@ router.get("/colors", async (req, res) => {
   }
 });
 
-// Apply filters and pagination to fetch paintings
+// Fetch paintings with optional filters
 router.get("/", async (req, res) => {
-  const { subject, color, limit = 10, offset = 0 } = req.query;
-  let query = "SELECT * FROM paintings";
-  let conditions = [];
-  let values = [];
-
-  if (subject) {
-    conditions.push("subjects @> $1::jsonb");
-    values.push(JSON.stringify([subject]));
-  }
-
-  if (color) {
-    conditions.push("colors @> $2::jsonb");
-    values.push(JSON.stringify([color]));
-  }
-
-  if (conditions.length > 0) {
-    query += " WHERE " + conditions.join(" AND ");
-  }
-
-  query += ` LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
-  values.push(parseInt(limit, 10), parseInt(offset, 10));
-
   try {
+    const { subject, color } = req.query;
+    let query = "SELECT * FROM paintings";
+    let conditions = [];
+    let values = [];
+
+    let index = 1;
+
+    if (color) {
+      conditions.push(`colors @> $${index}::jsonb`);
+      values.push(JSON.stringify([color]));
+      index++;
+    }
+
+    if (subject) {
+      conditions.push(`subjects @> $${index}::jsonb`);
+      values.push(JSON.stringify([subject]));
+      index++;
+    }
+
+
+    if (conditions.length > 0) {
+      query += " WHERE " + conditions.join(" AND ");
+    }
+
+    console.log(query, values); // Add this line for debugging
+
     const result = await pool.query(query, values);
     res.json(result.rows);
   } catch (err) {
-    console.error("Error executing query", err);
+    console.error("Error executing query", err.stack);
     res.status(500).json({ error: "An unexpected error occurred" });
+    console.error(err.stack);
   }
 });
 
