@@ -1,6 +1,14 @@
 /* Subject Style Sheet */
+
+/* Overrides select element for dropdown to display */
+/* the selected option in the dropdown */
+.select-wrapper input.select-dropdown select {
+display: block !important;
+}
 .subject-filter {
-    margin-bottom: 1rem;
+    display: flex; /* or 'flex' if you need to use flexbox */
+    margin: 0 auto; /* Auto margins on the sides for block-level elements will center it */
+    width: fit-content; /* Adjust width to the width of its content */
 }
 
 .subject-filter select {
