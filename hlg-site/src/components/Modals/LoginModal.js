@@ -47,7 +47,7 @@ const LoginModal = ({ show, onClose }) => {
             />
             <label htmlFor="login-password">Your password</label>
           </div>
-          <button type="submit" className="modal-submit-btn">Login</button>
+          <button type="submit" className="modal-submit-btn waves-effect waves-light">Login</button>
           {error && <p className="error">{error}</p>}
         </form>
       </div>
