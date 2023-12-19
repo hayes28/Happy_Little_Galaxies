@@ -63,3 +63,19 @@
 }
 
 /* #endregion */
+
+/* #region PAGINATION */
+
+.pagination li.active {
+  background-color: #E4CCFF; /* Set your desired background color */
+}
+
+.pagination li.active a {
+  color: #574B90; /* Set the text color for the link inside the active element */
+}
+
+.pagination li a {
+  color: #E4CCFF; /* Set the text color for the other pagination links */
+}
+
+/* #endregion */
