@@ -20,16 +20,18 @@ function ColorSwatch({ onColorSelect }) {
   }, []);
 
   return (
-    <div className="color-swatches">
-      {colors.map((color, index) => (
-        <button
-          key={index}
-          style={{ backgroundColor: color }}
-          onClick={() => onColorSelect(color)}
-          title={color}
-          className="color-swatch"
-        />
-      ))}
+    <div className="color-bg">
+      <div className="color-swatches">
+        {colors.map((color, index) => (
+          <button
+            key={index}
+            style={{ backgroundColor: color }}
+            onClick={() => onColorSelect(color)}
+            title={color}
+            className="color-swatch"
+          />
+        ))}
+      </div>
     </div>
   );
 }
