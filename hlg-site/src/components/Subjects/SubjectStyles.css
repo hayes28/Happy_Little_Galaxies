@@ -1,33 +1,36 @@
-/* Subject Style Sheet */
+/* SUBJECT STYLESHEET */
 
 /* Overrides select element for dropdown to display */
 /* the selected option in the dropdown */
 .select-wrapper input.select-dropdown select {
-display: block !important;
+  display: block !important;
 }
+
+.select-wrapper input.select-dropdown {
+  font-size: 1.5rem;
+  margin: 2rem;
+}
+
+.select-wrapper input{
+  color: white;
+  font-family: 'Raleway', sans-serif;
+}
+
 .subject-filter {
-    display: flex; /* or 'flex' if you need to use flexbox */
-    margin: 0 auto; /* Auto margins on the sides for block-level elements will center it */
-    width: fit-content; /* Adjust width to the width of its content */
+  display: flex; /* or 'flex' if you need to use flexbox */
+  margin: 0 auto; /* Auto margins on the sides for block-level elements will center it */
+  width: fit-content; /* Adjust width to the width of its content */
 }
 
-.subject-filter select {
-    padding: 0.5rem;
-    margin-left: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.subject-filter label {
-    margin-right: 0.5rem;
-    font-weight: bold;
-    color: white;
+.subject-bg {
+  background-color: rgba(74, 90, 127, 0.5);
+  border-radius: 5px;
 }
 
 /* Apply some basic responsive spacing */
 @media (min-width: 768px) {
-    .subject-filter {
-        display: inline-block;
-        margin-right: 1rem;
-    }
+  .subject-filter {
+    display: inline-block;
+    margin-right: 1rem;
+  }
 }
