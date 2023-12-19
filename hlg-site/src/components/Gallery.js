@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ColorFilter } from "../components/Colors/ColorFilter";
 import { SubjectFilter } from "../components/Subjects/SubjectFilter";
 import { FilterControls } from "../components/Buttons/FilterButtons";
 import usePaintings from "../hooks/usePaintings";
@@ -32,37 +31,44 @@ const Gallery = () => {
     <div className="filter-bg">
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      <div className="filter-header">
-        <ColorSwatch
-          onColorSelect={(color) => handleFilterChange(color, selectedSubject)}
-        />
-        <ColorFilter
-          selectedColor={selectedColor}
-          setSelectedColor={(color) =>
-            handleFilterChange(color, selectedSubject)
-          }
-        />
-        <SubjectFilter
-          selectedSubject={selectedSubject}
-          setSelectedSubject={(subject) =>
-            handleFilterChange(selectedColor, subject)
-          }
-        />
-        <FilterControls onApply={applyFilters} onClear={clearFilters} />
-      </div>
-      <div className="gallery">
-        {paintings.map((painting) => (
-          <div className="card" key={painting.id}>
-            <div className="card-image">
-              <img src={painting.painting_url} alt={painting.title} />
-            </div>
-            <div className="card-content">
-              <span className="card-title">{painting.title}</span>
-              <p>Colors: {painting.colors.join(", ")}</p>
-              <p>Subjects: {painting.subjects.join(", ")}</p>
-            </div>
+        <div className="row filter-header">
+          <div className="col s4">
+            <h3 className="white-text center-align">Filter By Color</h3>
           </div>
-        ))}
+          <div className="col s4">
+            <h3 className="white-text center-align">Filter By Subject</h3>
+          </div>
+          <div className="col s4">
+            <h3 className="white-text center-align">Apply Filters</h3>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s4 center-align">
+            <ColorSwatch onColorSelect={(color) => handleFilterChange(color, selectedSubject)} />
+          </div>
+          <div className="col s4 center-align">
+            <SubjectFilter
+              selectedSubject={selectedSubject}
+              setSelectedSubject={(subject) => handleFilterChange(selectedColor, subject)}
+            />
+          </div>
+          <div className="col s4 center-align">
+            <FilterControls onApply={applyFilters} onClear={clearFilters} />
+          </div>
+        </div>
+        <div className="gallery">
+          {paintings.map((painting) => (
+            <div className="card" key={painting.id}>
+              <div className="card-image">
+                <img src={painting.painting_url} alt={painting.title} />
+              </div>
+              <div className="card-content">
+                <span className="card-title white-text">{painting.title}</span>
+                <p className="white-text">Colors: {painting.colors.join(", ")}</p>
+                <p className="white-text">Subjects: {painting.subjects.join(", ")}</p>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );

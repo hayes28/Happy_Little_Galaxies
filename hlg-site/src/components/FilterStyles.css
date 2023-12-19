@@ -1,5 +1,5 @@
-/* Styling for filter section */
-/* Super basic styling for testing */
+/* STYLING FOR GALLERY & FILTER HEADER */
+/* STYLING FOR SPECIFIC COMPONENTS CAN BE FOUND IN RELATED COMPONENT FOLDERS */
 
 .filter-bg {
   background-image: image-set('https://firebasestorage.googleapis.com/v0/b/happy-little-galaxies.appspot.com/o/starry-night-sky.jpg?alt=media&token=80ba548a-d851-43f7-b611-9faf2925b692');
@@ -8,6 +8,8 @@
   background-position: center;
 }
 
+/* #region GALLERY */
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -15,8 +17,6 @@
   padding: 1rem;
   border-radius: 5px;
 }
-
-/* The gallery background image needs to be behind the filter-container color*/
 
 .gallery img {
   width: 100%;
@@ -27,6 +27,8 @@
 
 .gallery .card {
   margin-bottom: 1rem;
+  border-radius: 5px;
+  background-color: rgba(74, 90, 127, 0.687);
   border-radius: 5px;
 }
 
@@ -44,36 +46,20 @@
   margin-bottom: 1rem;
 }
 
+/* #endregion */
+
+/* #region FILTER HEADER */
+
 .filter-header {
-  background-color: #9E579D;
-  opacity: calc(100% - 50%);
-  padding: 1rem;
+  background-color: rgba(158, 87, 157, 0.5);
   border-radius: 5px;
 }
 
-.filter-container h2 {
-  margin-bottom: 1rem;
+.filter-header h3 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  margin: 1.2rem 0 1.2rem 0 !important;
 }
 
-.filter-container p {
-  margin-bottom: 1rem;
-}
-
-.filter-container label {
-  margin-right: 0.5rem;
-  font-weight: bold;
-}
-
-.filter-container select {
-  padding: 0.5rem;
-  margin-left: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.filter-container .filter {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
+/* #endregion */
