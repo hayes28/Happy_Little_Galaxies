@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase/firebaseInit';
 import M from 'materialize-css';
 import "./components/FilterStyles.css";
+import Footer from './components/Footer/Footer';
 
 
 const App = () => {
@@ -80,6 +81,7 @@ const App = () => {
       {showAccountModal && <AccountModal show={showAccountModal} onClose={handleCloseAccount} currentUser={currentUser} />}
       <MainSection />
       <Gallery />
+      <Footer />
     </div>
   );
 };

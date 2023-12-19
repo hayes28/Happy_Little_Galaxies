@@ -6,6 +6,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  min-height: 100vh; /* Ensure it covers the full height */
 }
 
 /* #region GALLERY */
@@ -76,6 +77,11 @@
 
 .pagination li a {
   color: #E4CCFF; /* Set the text color for the other pagination links */
+}
+
+.pagination {
+  margin: 0;
+  padding: 1rem 0 1rem 0;
 }
 
 /* #endregion */
