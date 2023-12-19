@@ -22,13 +22,13 @@ const Navbar = ({ currentUser, handleShowSignUp, handleShowLogin, isAuthStatusKn
             {isAuthStatusKnown && (
               currentUser ? (
               <>
-                <li><button className="nav-button btn-account" onClick={handleShowAccount} >Account</button></li>
-                <li><button className="nav-button btn-logout" onClick={handleLogout} >Logout</button></li>
+                <li><button className="nav-button btn-account waves-effect waves-light" onClick={handleShowAccount} >Account</button></li>
+                <li><button className="nav-button btn-logout waves-effect waves-light" onClick={handleLogout} >Logout</button></li>
               </>
             ) : (
               <>
-                <li><button className="nav-button btn-login" onClick={handleShowLogin}>Login</button></li>
-                <li><button className="btn-signup" onClick={handleShowSignUp}>Sign up</button></li>
+                <li><button className="nav-button btn-login waves-effect waves-light" onClick={handleShowLogin}>Login</button></li>
+                <li><button className="btn-signup waves-effect waves-light" onClick={handleShowSignUp}>Sign up</button></li>
               </>
             )
             )}
