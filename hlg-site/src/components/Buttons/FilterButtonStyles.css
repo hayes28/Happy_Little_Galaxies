@@ -8,9 +8,8 @@
 
 .filter-controls {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the buttons horizontally */
-  gap: 1rem; /* Add some space between the buttons */
+  justify-content: space-around;
+  padding: 0.7rem;
 }
 
 .filter-controls button {
