@@ -37,26 +37,27 @@ const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
   };
 
   return (
-    <div className="subject-filter">
-      <label htmlFor="subject">Subject</label>
-      <select
-        name="subject"
-        id="subject"
-        value={selectedSubject}
-        onChange={handleSubject}
-      >
-        <option value="">All</option>
-        {subjects.length ? (
-          subjects.map((subject, index) => (
-            <option key={index} value={subject}>
-              {subject}
-            </option>
-          ))
-        ) : (
-          <option disabled>Loading subjects...</option>
-        )}
-      </select>
-      {error && <div className="error">{error}</div>}
+    <div className="subject-bg">
+      <div className="subject-filter">
+        <select
+          name="subject"
+          id="subject"
+          value={selectedSubject}
+          onChange={handleSubject}
+        >
+          <option value="">All</option>
+          {subjects.length ? (
+            subjects.map((subject, index) => (
+              <option key={index} value={subject}>
+                {subject}
+              </option>
+            ))
+          ) : (
+            <option disabled>Loading subjects...</option>
+          )}
+        </select>
+        {error && <div className="error">{error}</div>}
+      </div>
     </div>
   );
 };
