@@ -10,21 +10,37 @@ const Gallery = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
 
-  const applyFilters = () => {
-    setFilters({ color: selectedColor, subject: selectedSubject });
-  }
+  // This function is called when the filter values change
+  const handleFilterChange = (newColor, newSubject) => {
+    setSelectedColor(newColor);
+    console.log("Selected color:", newColor);
+    setSelectedSubject(newSubject);
+    // Prepare the filters in the format that the backend expects
+    const filters = {};
+    if (newColor) filters.color = newColor;
+    if (newSubject) filters.subject = newSubject;
+    setFilters(filters);
+  };
 
+  // Called when the "Apply" button is clicked
+  const applyFilters = () => {
+    console.log(
+      "Applying filters with color:",
+      selectedColor,
+      "subject:",
+      selectedSubject
+    );
+    setFilters({ color: selectedColor, subject: selectedSubject });
+  };
+
+  // Called when the "Clear" button is clicked
   const clearFilters = () => {
     setSelectedColor("");
     setSelectedSubject("");
-    setFilters({ color: "", subject: "" });
-  }
-
-  const handleFilterChange = (color, subject) => {
-    setSelectedColor(color);
-    setSelectedSubject(subject);
-    setFilters({ color: color, subject: subject }); // Use the new color and subject
+    setFilters({});
   };
+
+  console.log("Paintings to render:", paintings); // Log the paintings state
 
   const paintingsPerPage = 10; // Number of paintings to display per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,12 +48,14 @@ const Gallery = () => {
 
   const indexOfLastPainting = currentPage * paintingsPerPage;
   const indexOfFirstPainting = indexOfLastPainting - paintingsPerPage;
-  const currentPaintings = paintings.slice(indexOfFirstPainting, indexOfLastPainting);
+  const currentPaintings = paintings.slice(
+    indexOfFirstPainting,
+    indexOfLastPainting
+  );
 
   const handlePageClick = (page) => {
     setCurrentPage(page);
   };
-
 
   return (
     <div className="filter-bg">
@@ -56,12 +74,18 @@ const Gallery = () => {
       </div>
       <div className="row">
         <div className="col s4 center-align">
-          <ColorSwatch onColorSelect={(color) => handleFilterChange(color, selectedSubject)} />
+          <ColorSwatch
+            onColorSelect={(color) =>
+              handleFilterChange(color, selectedSubject)
+            }
+          />
         </div>
         <div className="col s4 center-align">
           <SubjectFilter
             selectedSubject={selectedSubject}
-            setSelectedSubject={(subject) => handleFilterChange(selectedColor, subject)}
+            setSelectedSubject={(subject) =>
+              handleFilterChange(selectedColor, subject)
+            }
           />
         </div>
         <div className="col s4 center-align">
@@ -77,22 +101,35 @@ const Gallery = () => {
             <div className="card-content">
               <span className="card-title white-text">{painting.title}</span>
               <p className="white-text">Colors: {painting.colors.join(", ")}</p>
-              <p className="white-text">Subjects: {painting.subjects.join(", ")}</p>
+              <p className="white-text">
+                Subjects: {painting.subjects.join(", ")}
+              </p>
             </div>
           </div>
         ))}
       </div>
       <ul className="pagination center-align">
         <li className={currentPage === 1 ? "disabled" : "waves-effect"}>
-          <a href="#!" onClick={() => handlePageClick(currentPage - 1)}><i className="material-icons">chevron_left</i></a>
+          <a href="#!" onClick={() => handlePageClick(currentPage - 1)}>
+            <i className="material-icons">chevron_left</i>
+          </a>
         </li>
         {[...Array(totalPages)].map((_, i) => (
-          <li key={i} className={i + 1 === currentPage ? "active" : "waves-effect"}>
-            <a href="#!" onClick={() => handlePageClick(i + 1)}>{i + 1}</a>
+          <li
+            key={i}
+            className={i + 1 === currentPage ? "active" : "waves-effect"}
+          >
+            <a href="#!" onClick={() => handlePageClick(i + 1)}>
+              {i + 1}
+            </a>
           </li>
         ))}
-        <li className={currentPage === totalPages ? "disabled" : "waves-effect"}>
-          <a href="#!" onClick={() => handlePageClick(currentPage + 1)}><i className="material-icons">chevron_right</i></a>
+        <li
+          className={currentPage === totalPages ? "disabled" : "waves-effect"}
+        >
+          <a href="#!" onClick={() => handlePageClick(currentPage + 1)}>
+            <i className="material-icons">chevron_right</i>
+          </a>
         </li>
       </ul>
     </div>

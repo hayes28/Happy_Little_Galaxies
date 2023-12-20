@@ -12,6 +12,7 @@ const usePaintings = () => {
       setError(null);
       try {
         const queryString = new URLSearchParams(filters).toString();
+        console.log("Fetching with query:", queryString); // Log the query string
         const response = await fetch(
           `http://localhost:4000/filter?${queryString}`
         );

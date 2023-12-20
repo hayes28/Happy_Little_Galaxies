@@ -21,7 +21,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer class="page-footer">
+    <footer className="page-footer">
       <div className="container">
         <div className="left">
           © 2023 happy Little Galaxies Inc.

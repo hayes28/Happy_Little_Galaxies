@@ -23,7 +23,7 @@ csv()
         color_hex: painting.color_hex
           .replace(/(\r\n|\n|\r)/gm, "")
           .split(",")
-          .map((hex) => hex.trim()),
+          .map((hex) => hex.trim().toLowerCase()), // Convert hex codes to lowercase
         subjects: painting.subjects
           .replace(/(\r\n|\n|\r)/gm, "")
           .split(",")

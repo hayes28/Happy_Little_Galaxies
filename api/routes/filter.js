@@ -25,16 +25,30 @@ router.get("/subjects", async (req, res) => {
   }
 });
 
-// Fetch distinct colors
-router.get("/colors", async (req, res) => {
+// Endpoint to fetch combined color names and hex values
+router.get("/combined-colors", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT DISTINCT jsonb_array_elements_text(colors) as color FROM paintings;"
+    // Fetch the combined color names and hex values from each painting
+    const result = await pool.query(`
+      SELECT p.colors, p.color_hex FROM paintings p;
+    `);
+
+    // Assuming each painting's colors and color_hex are aligned arrays
+    const combinedColors = result.rows.flatMap((row) =>
+      row.colors.map((color, index) => ({
+        name: color,
+        hex: row.color_hex[index] || "#FFFFFF", // Fallback if no corresponding hex
+      }))
     );
-    const colors = result.rows.map((row) => row.color);
-    res.json(colors);
+
+    // Send unique combined colors
+    const uniqueCombinedColors = Array.from(
+      new Set(combinedColors.map((cc) => JSON.stringify(cc)))
+    ).map((str) => JSON.parse(str));
+
+    res.json(uniqueCombinedColors);
   } catch (err) {
-    console.error("Error fetching colors", err);
+    console.error("Error fetching combined colors", err);
     res.status(500).json({ error: "An unexpected error occurred" });
   }
 });
@@ -50,8 +64,10 @@ router.get("/", async (req, res) => {
     let index = 1;
 
     if (color) {
-      conditions.push(`colors @> $${index}::jsonb`);
-      values.push(JSON.stringify([color]));
+      conditions.push(
+        `(colors @> $${index}::jsonb OR color_hex @> $${index}::jsonb)`
+      );
+      values.push(JSON.stringify([color])); // This assumes color could be either name or hex
       index++;
     }
 
@@ -61,12 +77,11 @@ router.get("/", async (req, res) => {
       index++;
     }
 
-
     if (conditions.length > 0) {
       query += " WHERE " + conditions.join(" AND ");
     }
 
-    console.log(query, values); // Add this line for debugging
+    console.log("Executing query:", query, "with values:", values); // Add this line for debugging
 
     const result = await pool.query(query, values);
     res.json(result.rows);
