@@ -56,37 +56,48 @@ router.get("/combined-colors", async (req, res) => {
 // Fetch paintings with optional filters
 router.get("/", async (req, res) => {
   try {
-    const { subject, color } = req.query;
-    const colors = color ? JSON.parse(color) : [];
-    const subjects = subject ? JSON.parse(subject) : [];
-    let query = "SELECT * FROM paintings";
-    let conditions = [];
-    let values = [];
-    let index = 1;
+    console.log("Received query:", req.query); // Log the received query
 
-    colors.forEach((c) => {
-      conditions.push(
-        `(colors @> $${index}::jsonb OR color_hex @> $${index}::jsonb)`
-      );
-      values.push(JSON.stringify([c]));
-      index++;
-    });
-
-    subjects.forEach((s) => {
-      conditions.push(`subjects @> $${index}::jsonb`);
-      values.push(JSON.stringify([s]));
-      index++;
-    });
-
-    if (conditions.length > 0) {
-      query += " WHERE " + conditions.join(" AND ");
+    // Parse colors and subjects from query parameters
+    let colors = req.query.colors ? req.query.colors : [];
+    if (typeof colors === "string") {
+      try {
+        colors = JSON.parse(colors);
+      } catch (err) {
+        // If parsing as JSON fails, treat it as a single color
+        colors = [colors];
+      }
     }
-    
+    const subjects = req.query.subjects || [];
 
+    // Build the WHERE clause
+    const whereClauses = [];
+    const values = [];
+
+    if (colors.length) {
+      colors.forEach((color, index) => {
+        whereClauses.push(`colors @> $${index + 1}::jsonb`);
+        values.push(JSON.stringify([color]));
+      });
+    }
+
+    // If no colors or subjects are provided, return all paintings
+    if (!subjects.length && !colors.length) {
+      const { rows } = await pool.query("SELECT * FROM paintings");
+      return res.json(rows);
+    }
+
+    if (subjects.length) {
+      whereClauses.push(`subjects @> $${values.length + 1}`);
+      values.push(JSON.stringify(subjects));
+    }
+
+    // Execute the query
+    const query = `SELECT * FROM paintings WHERE ${whereClauses.join(" AND ")}`;
     console.log("Executing query:", query, "with values:", values);
-
-    const result = await pool.query(query, values);
-    res.json(result.rows);
+    const { rows } = await pool.query(query, values);
+    res.json(rows);
+    console.log("Executing query:", query, "with values:", values);
   } catch (err) {
     console.error("Error executing query", err.stack);
     res.status(500).json({ error: "An unexpected error occurred" });

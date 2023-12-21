@@ -32,16 +32,16 @@ const Gallery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(paintings.length / paintingsPerPage);
 
-  const indexOfLastPainting = currentPage * paintingsPerPage;
-  const indexOfFirstPainting = indexOfLastPainting - paintingsPerPage;
+  const indexOfFirstPainting = (currentPage - 1 ) * paintingsPerPage;
+  const indexOfLastPainting = indexOfFirstPainting + paintingsPerPage;
   const currentPaintings = paintings.slice(
     indexOfFirstPainting,
     indexOfLastPainting
   );
 
-  const handlePageClick = (page) => {
-    setCurrentPage(page);
-  };
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
 
   return (
     <div className="filter-bg">
@@ -76,8 +76,8 @@ const Gallery = () => {
         </div>
       </div>
       <div className="gallery">
-        {currentPaintings.map((painting) => (
-          <div className="card" key={painting.id}>
+        {currentPaintings.map((painting, index) => (
+          <div className="card" key={index}>
             <div className="card-image">
               <img src={painting.painting_url} alt={painting.title} />
             </div>
