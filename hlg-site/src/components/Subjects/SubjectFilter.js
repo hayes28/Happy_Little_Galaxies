@@ -10,6 +10,7 @@ const SubjectFilter = ({ selectedSubjects, setSelectedSubjects }) => {
 
   useEffect(() => {
     const fetchSubjects = async () => {
+      console.log("Fetching subjects");
       try {
         const response = await axios.get(
           "http://localhost:4000/filter/subjects"

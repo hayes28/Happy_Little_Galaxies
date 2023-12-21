@@ -30,6 +30,7 @@ function ColorSwatch({ selectedColors, setSelectedColors }) {
 
   // Handler to toggle selection of colors
   const handleColorSelect = (hex) => {
+    console.log("Color selected:", hex);
     const isSelected = selectedColors.includes(hex);
     // If the color is already selected, remove it, otherwise add it
     setSelectedColors(

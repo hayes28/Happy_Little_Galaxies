@@ -7,24 +7,19 @@ const usePaintings = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log("Fetching paintings with filters:", filters); // Log the filters state
     const fetchPaintings = async () => {
       setLoading(true);
       setError(null);
       try {
         // Serialize array filters into query string
         const queryString = Object.keys(filters)
-          .map((key) => {
-            const value = filters[key];
-            return Array.isArray(value)
-              ? value
-                  .map(
-                    (v) => `${key}=${encodeURIComponent(JSON.stringify([v]))}`
-                  )
-                  .join("&")
-              : `${key}=${encodeURIComponent(value)}`;
-          })
+          .map((key) =>
+            filters[key]
+              .map((value) => `${key}=${encodeURIComponent(value)}`)
+              .join("&")
+          )
           .join("&");
-
         console.log("Fetching with query:", queryString); // Log the query string
         const response = await fetch(
           `http://localhost:4000/filter?${queryString}`
@@ -34,7 +29,6 @@ const usePaintings = () => {
         }
         const data = await response.json();
         setPaintings(data);
-        console.log("Paintings fetched:", data); // Log the paintings data
       } catch (err) {
         setError(err.message);
       } finally {

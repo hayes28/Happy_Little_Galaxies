@@ -17,3 +17,18 @@
   font-size: 1.5rem;
   border-radius: 14px;
 }
+
+/* Default font size for larger screens */
+.apply-button, .clear-button {
+  font-size: 16px; /* Adjust to your default size */
+  overflow: hidden; /* Assuming you still want to use this */
+}
+
+/* Override styles for smaller screens */
+@media screen and (max-width: 768px) { /* Adjust this breakpoint to where you see the issue starting */
+  .filter-controls button {
+    font-size: 0.9rem; /* Smaller font size for smaller screens */
+    padding: 10px 16px; /* Reduced padding */
+    margin: 0 5px; /* Ensure buttons don't touch */
+  }
+}
