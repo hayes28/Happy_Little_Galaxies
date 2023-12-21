@@ -57,38 +57,39 @@ router.get("/combined-colors", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const { subject, color } = req.query;
+    const colors = color ? JSON.parse(color) : [];
+    const subjects = subject ? JSON.parse(subject) : [];
     let query = "SELECT * FROM paintings";
     let conditions = [];
     let values = [];
-
     let index = 1;
 
-    if (color) {
+    colors.forEach((c) => {
       conditions.push(
         `(colors @> $${index}::jsonb OR color_hex @> $${index}::jsonb)`
       );
-      values.push(JSON.stringify([color])); // This assumes color could be either name or hex
+      values.push(JSON.stringify([c]));
       index++;
-    }
+    });
 
-    if (subject) {
+    subjects.forEach((s) => {
       conditions.push(`subjects @> $${index}::jsonb`);
-      values.push(JSON.stringify([subject]));
+      values.push(JSON.stringify([s]));
       index++;
-    }
+    });
 
     if (conditions.length > 0) {
       query += " WHERE " + conditions.join(" AND ");
     }
+    
 
-    console.log("Executing query:", query, "with values:", values); // Add this line for debugging
+    console.log("Executing query:", query, "with values:", values);
 
     const result = await pool.query(query, values);
     res.json(result.rows);
   } catch (err) {
     console.error("Error executing query", err.stack);
     res.status(500).json({ error: "An unexpected error occurred" });
-    console.error(err.stack);
   }
 });
 

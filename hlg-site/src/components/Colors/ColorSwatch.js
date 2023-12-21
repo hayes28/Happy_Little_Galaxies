@@ -1,9 +1,8 @@
-// ColorSwatch.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ColorStyles.css";
 
-function ColorSwatch({ onColorSelect }) {
+function ColorSwatch({ selectedColors, setSelectedColors }) {
   const [colors, setColors] = useState([]);
 
   // Fetch combined color names and hex values
@@ -29,16 +28,30 @@ function ColorSwatch({ onColorSelect }) {
       });
   }, []);
 
+  // Handler to toggle selection of colors
+  const handleColorSelect = (hex) => {
+    const isSelected = selectedColors.includes(hex);
+    // If the color is already selected, remove it, otherwise add it
+    setSelectedColors(
+      isSelected
+        ? selectedColors.filter((color) => color !== hex)
+        : [...selectedColors, hex]
+    );
+  };
+
   return (
     <div className="color-bg shared-bg">
       <div className="color-swatches">
         {colors.map((color) => (
           <button
-            key={`${color.name}-${color.hex}`} // Unique key using name and hex
-            style={{ backgroundColor: color.hex }} // Apply the background color directly
-            onClick={() => onColorSelect(color.hex)}
+            key={`${color.name}-${color.hex}`}
+            style={{ backgroundColor: color.hex }}
+            onClick={() => handleColorSelect(color.hex)}
             title={color.name}
-            className="color-swatch"
+            // Apply 'selected' class if the color is in the selectedColors array
+            className={`color-swatch ${
+              selectedColors.includes(color.hex) ? "selected" : ""
+            }`}
           />
         ))}
       </div>
