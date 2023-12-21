@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SubjectStyles.css";
-import "../FilterStyles.css"
+import "../FilterStyles.css";
 import M from "materialize-css";
 
-const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
+const SubjectFilter = ({ selectedSubjects, setSelectedSubjects }) => {
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState("");
 
@@ -24,43 +24,47 @@ const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
     fetchSubjects();
   }, []);
 
+  const handleSubjectChange = (event) => {
+    const { options } = event.target;
+    const value = [];
+    for (let i = 0, len = options.length; i < len; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    setSelectedSubjects(value);
+  };
+
+
   // Initialize Materialize CSS select after the component mounts and whenever subjects change
   useEffect(() => {
-    // Ensure Materialize is available and subjects/colors are loaded
+    // Ensure Materialize is available and subjects are loaded
     if (window.M && subjects.length) {
-      const select = document.querySelector("#subject");
-      M.FormSelect.init(select);
+      const selectElements = document.querySelectorAll("select");
+      M.FormSelect.init(selectElements, { isMultiple: true });
     }
   }, [subjects]);
 
-  const handleSubject = (e) => {
-    setSelectedSubject(e.target.value);
-  };
 
   return (
     <div className="subject-bg shared-bg">
       <div className="subject-filter">
         <select
+          multiple
           name="subject"
           id="subject"
-          value={selectedSubject}
-          onChange={handleSubject}
+          value={selectedSubjects}
+          onChange={handleSubjectChange}
         >
-          <option value="">All</option>
-          {subjects.length ? (
-            subjects.map((subject, index) => (
-              <option key={index} value={subject}>
-                {subject}
-              </option>
-            ))
-          ) : (
-            <option disabled>Loading subjects...</option>
-          )}
+          {subjects.map((subject, index) => (
+            <option key={index} value={subject}>
+              {subject}
+            </option>
+          ))}
         </select>
-        {error && <div className="error">{error}</div>}
       </div>
     </div>
   );
-};
+}
 
 export { SubjectFilter };

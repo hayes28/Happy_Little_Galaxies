@@ -11,7 +11,20 @@ const usePaintings = () => {
       setLoading(true);
       setError(null);
       try {
-        const queryString = new URLSearchParams(filters).toString();
+        // Serialize array filters into query string
+        const queryString = Object.keys(filters)
+          .map((key) => {
+            const value = filters[key];
+            return Array.isArray(value)
+              ? value
+                  .map(
+                    (v) => `${key}=${encodeURIComponent(JSON.stringify([v]))}`
+                  )
+                  .join("&")
+              : `${key}=${encodeURIComponent(value)}`;
+          })
+          .join("&");
+
         console.log("Fetching with query:", queryString); // Log the query string
         const response = await fetch(
           `http://localhost:4000/filter?${queryString}`
@@ -21,6 +34,7 @@ const usePaintings = () => {
         }
         const data = await response.json();
         setPaintings(data);
+        console.log("Paintings fetched:", data); // Log the paintings data
       } catch (err) {
         setError(err.message);
       } finally {

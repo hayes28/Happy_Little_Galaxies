@@ -7,22 +7,9 @@ import "./FilterStyles.css";
 
 const Gallery = () => {
   const { paintings, loading, error, setFilters } = usePaintings();
-  const [selectedColor, setSelectedColor] = useState();
-  const [selectedSubject, setSelectedSubject] = useState();
+  const [selectedColor, setSelectedColor] = useState([]);
+  const [selectedSubject, setSelectedSubject] = useState([]);
 
-  // This function is called when the filter values change
-  const handleFilterChange = (newColor, newSubject) => {
-    setSelectedColor(newColor);
-    console.log("Selected color:", newColor);
-    setSelectedSubject(newSubject);
-    // Prepare the filters in the format that the backend expects
-    const filters = {};
-    if (newColor) filters.color = newColor;
-    if (newSubject) filters.subject = newSubject;
-    setFilters(filters);
-  };
-
-  // Called when the "Apply" button is clicked
   const applyFilters = () => {
     console.log(
       "Applying filters with color:",
@@ -30,13 +17,12 @@ const Gallery = () => {
       "subject:",
       selectedSubject
     );
-    setFilters({ color: selectedColor, subject: selectedSubject });
+    setFilters({ colors: selectedColor, subjects: selectedSubject });
   };
 
-  // Called when the "Clear" button is clicked
   const clearFilters = () => {
-    setSelectedColor("");
-    setSelectedSubject("");
+    setSelectedColor([]);
+    setSelectedSubject([]);
     setFilters({});
   };
 
@@ -75,17 +61,14 @@ const Gallery = () => {
       <div className="row">
         <div className="col s4 center-align">
           <ColorSwatch
-            onColorSelect={(color) =>
-              handleFilterChange(color, selectedSubject)
-            }
+            selectedColors={selectedColor}
+            setSelectedColors={setSelectedColor}
           />
         </div>
         <div className="col s4 center-align">
           <SubjectFilter
-            selectedSubject={selectedSubject}
-            setSelectedSubject={(subject) =>
-              handleFilterChange(selectedColor, subject)
-            }
+            selectedSubjects={selectedSubject}
+            setSelectedSubjects={setSelectedSubject}
           />
         </div>
         <div className="col s4 center-align">
