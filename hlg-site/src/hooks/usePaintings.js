@@ -12,15 +12,17 @@ const usePaintings = () => {
       setLoading(true);
       setError(null);
       try {
-        // Serialize array filters into query string
-        const queryString = Object.keys(filters)
-          .map((key) =>
-            filters[key]
-              .map((value) => `${key}=${encodeURIComponent(value)}`)
-              .join("&")
-          )
-          .join("&");
+        let queryString = [];
+        for (const key in filters) {
+          if (filters[key].length > 0) {
+            queryString.push(
+              `${key}=${encodeURIComponent(JSON.stringify(filters[key]))}`
+            );
+          }
+        }
+        queryString = queryString.join("&");
         console.log("Fetching with query:", queryString); // Log the query string
+
         const response = await fetch(
           `http://localhost:4000/filter?${queryString}`
         );
