@@ -55,11 +55,11 @@ router.get("/combined-colors", async (req, res) => {
 
 // Fetch paintings with optional filters
 router.get("/", async (req, res) => {
+  console.log("Received query:", req.query); // Log the received query
   try {
-    console.log("Received query:", req.query); // Log the received query
 
     // Parse colors and subjects from query parameters
-    let colors = req.query.colors ? req.query.colors : [];
+    let colors = req.query.colors || [];
     if (typeof colors === "string") {
       try {
         colors = JSON.parse(colors);
