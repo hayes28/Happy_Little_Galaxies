@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./SubjectStyles.css";
+import "../FilterStyles.css"
 import M from "materialize-css";
 
 const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
@@ -37,7 +38,7 @@ const SubjectFilter = ({ selectedSubject, setSelectedSubject }) => {
   };
 
   return (
-    <div className="subject-bg">
+    <div className="subject-bg shared-bg">
       <div className="subject-filter">
         <select
           name="subject"

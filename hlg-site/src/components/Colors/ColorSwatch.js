@@ -30,7 +30,7 @@ function ColorSwatch({ onColorSelect }) {
   }, []);
 
   return (
-    <div className="color-bg">
+    <div className="color-bg shared-bg">
       <div className="color-swatches">
         {colors.map((color) => (
           <button

@@ -7,8 +7,8 @@ import "./FilterStyles.css";
 
 const Gallery = () => {
   const { paintings, loading, error, setFilters } = usePaintings();
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSubject, setSelectedSubject] = useState("");
+  const [selectedColor, setSelectedColor] = useState();
+  const [selectedSubject, setSelectedSubject] = useState();
 
   // This function is called when the filter values change
   const handleFilterChange = (newColor, newSubject) => {
