@@ -11,12 +11,7 @@ const Gallery = () => {
   const [selectedSubject, setSelectedSubject] = useState([]);
 
   const applyFilters = () => {
-    console.log(
-      "Applying filters with color:",
-      selectedColor,
-      "subject:",
-      selectedSubject
-    );
+    console.log("Applying filters with color names:", selectedColor, "subject:", selectedSubject);
     setFilters({ colors: selectedColor, subjects: selectedSubject });
   };
 
@@ -26,7 +21,7 @@ const Gallery = () => {
     setFilters({});
   };
 
-  console.log("Paintings to render:", paintings); // Log the paintings state
+  console.log("Paintings to render:", paintings, "Selected color names:", selectedColor);
 
   const paintingsPerPage = 10; // Number of paintings to display per page
   const [currentPage, setCurrentPage] = useState(1);
