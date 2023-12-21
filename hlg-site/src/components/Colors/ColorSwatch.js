@@ -29,16 +29,15 @@ function ColorSwatch({ selectedColors, setSelectedColors }) {
   }, []);
 
   // Handler to toggle selection of colors
-  const handleColorSelect = (hex) => {
-    console.log("Color selected:", hex);
-    const isSelected = selectedColors.includes(hex);
-    // If the color is already selected, remove it, otherwise add it
-    setSelectedColors(
-      isSelected
-        ? selectedColors.filter((color) => color !== hex)
-        : [...selectedColors, hex]
-    );
-  };
+  const handleColorSelect = (colorName) => {
+  console.log("Color selected:", colorName);
+  const isSelected = selectedColors.includes(colorName);
+  setSelectedColors(
+    isSelected
+      ? selectedColors.filter((color) => color !== colorName)
+      : [...selectedColors, colorName]
+  );
+};
 
   return (
     <div className="color-bg shared-bg">
@@ -47,11 +46,11 @@ function ColorSwatch({ selectedColors, setSelectedColors }) {
           <button
             key={`${color.name}-${color.hex}`}
             style={{ backgroundColor: color.hex }}
-            onClick={() => handleColorSelect(color.hex)}
+            onClick={() => handleColorSelect(color.name)}
             title={color.name}
             // Apply 'selected' class if the color is in the selectedColors array
             className={`color-swatch ${
-              selectedColors.includes(color.hex) ? "selected" : ""
+              selectedColors.includes(color.name) ? "selected" : ""
             }`}
           />
         ))}
