@@ -93,7 +93,7 @@ router.get("/", async (req, res) => {
     }
 
     // Execute the query
-    const query = `SELECT * FROM paintings WHERE ${whereClauses.join(" AND ")}`;
+    const query = `SELECT * FROM paintings WHERE ${whereClauses.join( "AND" )}`;
     console.log("Executing query:", query, "with values:", values);
     const { rows } = await pool.query(query, values);
     res.json(rows);
