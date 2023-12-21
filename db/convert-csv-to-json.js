@@ -4,7 +4,7 @@ const path = require("path");
 
 const csvFilePath = path.join(
   __dirname,
-  "HLG_data - Sheet1 (4).csv"
+  "HLG_data.csv"
 );
 const jsonFilePath = path.join(__dirname, "data.json");
 
